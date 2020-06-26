@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/ph/Desktop/UofT/Year 3/CSC209/fartootp/lab3/split_array.c
+stdio.h
+-
+stdlib.h
+-
+
