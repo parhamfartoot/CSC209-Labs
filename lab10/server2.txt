@@ -1,0 +1,123 @@
+Script started on 2019-11-22 17:50:12-0500
+]0;fartootp@nxsrv:/h/u16/c9/01/fartootp/Desktop/fartootp/lab10nxsrv:~/Desktop/fartootp/lab10$ gdb bufserver
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from bufserver...done.
+(gdb) break main
+Breakpoint 1 at 0xca2: file bufserver.c, line 18.
+(gdb) run
+Starting program: /h/u16/c9/01/fartootp/fartootp/lab10/bufserver 
+
+Breakpoint 1, main () at bufserver.c:18
+18	int main() {
+(gdb) display buf
+1: buf = 0x0
+(gdb) display inbuf
+No symbol "inbuf" in current context.
+(gdb) n
+21	    setbuf(stdout, NULL);
+1: buf = 0x0
+(gdb) n
+23	    struct sockaddr_in *self = init_server_addr(PORT);
+1: buf = 0x0
+(gdb) n
+24	    int listenfd = set_up_server_socket(self, 5);
+1: buf = 0x0
+(gdb) n
+27	        int fd = accept_connection(listenfd);
+1: buf = 0x0
+(gdb) n
+Waiting for a new connection...
+New connection accepted from 127.0.0.1:57868
+28	        if (fd < 0) {
+1: buf = 0x0
+(gdb) display inbuf
+2: inbuf = 9
+(gdb) n
+33	        char buf[BUFSIZE] = {'\0'};
+1: buf = 0x0
+2: inbuf = 9
+(gdb) n
+34	        int inbuf = 0;           // How many bytes currently in buffer?
+1: buf = 0x0
+2: inbuf = 9
+(gdb) n
+35	        int room = sizeof(buf);  // How many bytes remaining in buffer?
+1: buf = 0x0
+2: inbuf = 0
+(gdb) n
+36	        char *after = buf;       // Pointer to position after the data in buf
+1: buf = 0x0
+2: inbuf = 0
+(gdb) n
+39	        while ((nbytes = read(fd, after, room)) > 0) {
+1: buf = 0x0
+2: inbuf = 0
+(gdb) n
+n
+41	            inbuf += nbytes;
+1: buf = 0x0
+2: inbuf = 0
+(gdb) n
+52	            while ((where = find_network_newline(buf, inbuf)) > 0) {
+1: buf = 0x0
+2: inbuf = 6
+(gdb) n
+81	            after = &buf[inbuf];
+1: buf = 0x0
+2: inbuf = 6
+(gdb) n
+82	            room += where;
+1: buf = 0x0
+2: inbuf = 6
+(gdb) n
+39	        while ((nbytes = read(fd, after, room)) > 0) {
+1: buf = 0x0
+2: inbuf = 6
+(gdb) n
+41	            inbuf += nbytes;
+1: buf = 0x0
+2: inbuf = 6
+(gdb) n
+52	            while ((where = find_network_newline(buf, inbuf)) > 0) {
+1: buf = 0x0
+2: inbuf = 35
+(gdb) n
+58	                buf[where - 2] = '\0';
+1: buf = 0x0
+2: inbuf = 35
+(gdb) n
+59	                buf[where - 1] = '\0';
+1: buf = 0x0
+2: inbuf = 35
+(gdb) n
+61	                printf("Next message: %s\n", buf);
+1: buf = 0x0
+2: inbuf = 35
+(gdb) n
+Next message: A stitch in time
+71	                buf[where - 1] = '\0';
+1: buf = 0x0
+2: inbuf = 35
+(gdb) q
+A debugging session is active.
+
+	Inferior 1 [process 22018] will be killed.
+
+Quit anyway? (y or n) y
+]0;fartootp@nxsrv:/h/u16/c9/01/fartootp/Desktop/fartootp/lab10nxsrv:~/Desktop/fartootp/lab10$ exit
+exit
+
+Script done on 2019-11-22 17:59:36-0500
